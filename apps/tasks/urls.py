@@ -1,9 +1,9 @@
 from django.urls import include, path
 from rest_framework import routers
-from .views import TodoViewSet
+from .views import TaskViewSet
 
 router = routers.DefaultRouter()
-router.register("todos", TodoViewSet)
+router.register("tasks", TaskViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

@@ -1,7 +1,14 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Todo
+from .models import Task
 
-class TodoSerializer(ModelSerializer):
+class TaskSerializer(ModelSerializer):
     class Meta:
-        model = Todo
+        model = Task
         fields = "__all__"
+        depth = 1
+        read_only_fields = ["owner"]
+
+    def create(self, validated_data):
+        request = self.context.get("request")
+        validated_data["owner"] = request.user
+        return super().create(validated_data)
